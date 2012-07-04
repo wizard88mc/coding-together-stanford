@@ -36,16 +36,18 @@
 }
 
 -(void) addMessageBrainLabel:(NSString*)message {
+    
+    self.operationShowed++;
     NSString* current = [[self messagesBrain] text];
     // Maximum number of operation showed is 5;
     if ([self operationShowed] > 1) {
         NSRange range = [current rangeOfString:@" "];
         NSString* substring = [[[self messagesBrain] text] substringToIndex:range.location];
         
+        current = [current stringByReplacingOccurrencesOfString:substring withString:@""];
     }
     [[self messagesBrain] setText:[current stringByAppendingFormat:@"%@ ", message]];
     
-    self.operationShowed++;
 }
 
 - (IBAction)digitPressed:(UIButton*)sender {
